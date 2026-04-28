@@ -11,12 +11,19 @@ body {
     color: #ffffff;
     line-height: 1.5;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 32px;
+}
+
+@media (max-width:600px){
+    .container{
+        padding:0 16px;
+    }
 }
 
 /* Typography */
@@ -468,6 +475,16 @@ h1, h2, h3, h4 {
     margin: 0 auto;
 }
 
+@media (max-width:900px){
+    .contact-wrapper{
+        padding: 24px;
+    }
+}
+
+ .contact-form-wrapper{
+    width:100%;
+ } 
+
 .contact-info-box h3 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -534,7 +551,9 @@ h1, h2, h3, h4 {
     font-family: inherit;
     outline: none;
     margin-bottom: 20px;
+    
 }
+
 
 .consult-form input:focus,
 .consult-form select:focus,
@@ -546,6 +565,14 @@ h1, h2, h3, h4 {
 .form-feedback {
     margin-top: 12px;
     font-size: 0.85rem;
+}
+
+@media (max-width:480px){
+    .consult-form input,
+    .consult-form textarea{
+        padding: 12px;
+        font-size:14px;
+    }
 }
 
 /* Footer */
