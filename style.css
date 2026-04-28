@@ -310,7 +310,6 @@ h1, h2, h3, h4 {
 }
 
 .live-demo-bg.task-demo::after {
-    content: "✓ TaskFlow • Java Spring";
     position: absolute;
     bottom: 12px;
     left: 16px;
