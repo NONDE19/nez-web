@@ -153,6 +153,215 @@ h1, h2, h3, h4 {
     cursor: pointer;
 }
 
+
+/* ======================== DARK/LIGHT MODE TOGGLE ======================== */
+.theme-toggle {
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid #a855f7;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-left: 20px;
+}
+
+.theme-toggle i {
+    font-size: 14px;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle .fa-sun {
+    color: #fbbf24;
+}
+
+.theme-toggle .fa-moon {
+    color: #c084fc;
+}
+
+.toggle-ball {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    border-radius: 50%;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Light mode ball position */
+body.light-mode .toggle-ball {
+    transform: translateX(30px);
+}
+
+/* Light mode styles */
+body.light-mode {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+body.light-mode .header,
+body.light-mode .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom-color: #e2e8f0;
+}
+
+body.light-mode .nav-link,
+body.light-mode .nav-item {
+    color: #1e293b;
+}
+
+body.light-mode .nav-link:hover,
+body.light-mode .nav-item:hover {
+    color: #a855f7;
+}
+
+body.light-mode .service-card,
+body.light-mode .project-card,
+body.light-mode .gallery-item {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+body.light-mode .service-card p,
+body.light-mode .project-card p {
+    color: #475569;
+}
+
+body.light-mode .section-header p {
+    color: #64748b;
+}
+
+body.light-mode .hero-content p {
+    color: #334155;
+}
+
+body.light-mode .tech-stack span {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+body.light-mode .contact-wrapper {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+body.light-mode .contact-form input,
+body.light-mode .contact-form select,
+body.light-mode .contact-form textarea,
+body.light-mode .consult-form input,
+body.light-mode .consult-form select,
+body.light-mode .consult-form textarea {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+body.light-mode .contact-info ul li {
+    color: #334155;
+}
+
+body.light-mode .footer {
+    background: #f1f5f9;
+    border-top-color: #e2e8f0;
+}
+
+body.light-mode .footer-logo,
+body.light-mode .footer-content p {
+    color: #1e293b;
+}
+
+body.light-mode .social-icons a {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+body.light-mode .social-icons a:hover {
+    background: #a855f7;
+    color: white;
+}
+
+body.light-mode .filter-btn {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+body.light-mode .filter-btn:hover,
+body.light-mode .filter-btn.active {
+    background: #a855f7;
+    color: white;
+}
+
+body.light-mode .modal-content {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+body.light-mode .service-card h3,
+body.light-mode .project-card h3 {
+    color: #0f172a;
+}
+
+body.light-mode .badge {
+    background: #e2e8f0;
+    color: #a855f7;
+}
+
+body.light-mode .hero-badge {
+    background: #e2e8f0;
+    color: #a855f7;
+}
+
+body.light-mode .btn-outline {
+    border-color: #a855f7;
+    color: #1e293b;
+}
+
+body.light-mode .btn-outline:hover {
+    background: rgba(168, 85, 247, 0.1);
+}
+
+body.light-mode .project-link {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+body.light-mode .project-link:hover {
+    background: #a855f7;
+    color: white;
+}
+
+body.light-mode .floating-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #e2e8f0;
+    color: #1e293b;
+}
+
+body.light-mode .tech-badge {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+/* Smooth transition for all elements */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive toggle position */
+@media (max-width: 900px) {
+    .theme-toggle {
+        margin-left: auto;
+        margin-right: 15px;
+    }
+}
 /* Hero Section */
 .hero {
     position: relative;
