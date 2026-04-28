@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Neztech| Web Development & Graphic Design</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome 6  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- EmailJS Library  -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo"><span class="logo-highlight">&lt;/&gt;</span> NEZTECH<span class="dot">.</span></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-item active">Home</a></li>
+        <li><a href="#services" class="nav-item">Services</a></li>
+        <li><a href="#projects" class="nav-item">Live Projects</a></li>
+        <li><a href="#gallery" class="nav-item">Graphic Gallery</a></li>
+        <li><a href="#contact" class="nav-item">Consultation</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Web Dev + Graphic Design + IT Solutions</div>
+      <h1>Crafting Digital Experiences<span class="hero-accent">.</span></h1>
+      <p>Web developer & creative designer — Java, JavaScript, HTML/CSS, troubleshooting, software installation, and strategic IT consulting.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary"><i class="fas fa-code"></i> Explore live work</a>
+        <a href="#contact" class="btn-outline"><i class="fas fa-comments"></i> Free consultation</a>
+      </div>
+      <div class="tech-stack">
+        <span>Java</span><span>EmailJs</span><span>HTML/CSS</span><span>JavaScript</span><span>Firebase</span><span>IT Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section  -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>IT & creative <span class="gradient-text">services</span></h2>
+        <p>End‑to‑end solutions — from web development to on‑site IT support</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Web Development</h3>
+          <p>Responsive websites, Java backend, HTML/CSS/JS frontend, custom dashboards & e‑commerce.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-palette"></i></div>
+          <h3>Graphic Design</h3>
+          <p>Logos, brand identity, social media kits, brochures, and high‑resolution digital assets.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-headset"></i></div>
+          <h3>IT Consultation</h3>
+          <p>Strategic tech planning, workflow automation, digital transformation, and infrastructure audit.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-tools"></i></div>
+          <h3>Troubleshooting & Fixes</h3>
+          <p>Hardware/software diagnostics, error resolution, performance tuning, and system recovery.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-download"></i></div>
+          <h3>Software Installation</h3>
+          <p>Licensed & OSS setup, environment configuration (Java, IDEs, servers), version management.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <h3>Java + Cloud Solutions</h3>
+          <p>Spring Boot APIs, microservices, deployment, database integration & maintenance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Projects Section  -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-header">
+        <h2>Live <span class="gradient-text">projects</span></h2>
+        <p>Interactive web apps — fully functional, click & explore</p>
+      </div>
+      <div class="projects-grid">
+        <!-- Project 1 - Task manager demo -->
+        <div class="project-card">
+          <div class="project-preview live-demo-bg task-demo"></div>
+          <div class="project-info">
+            <h3>TaskFlow Manager</h3>
+            <p>Full‑stack Java + Spring + H2 + HTML/CSS/JS. Add, complete & delete tasks live.</p>
+            <div class="tech-badge">Java</div><div class="tech-badge">Spring Boot</div><div class="tech-badge">CSS Grid</div>
+            <a href="#" class="project-link live-demo-btn" data-demo="taskManager"><i class="fas fa-external-link-alt"></i> Launch Live Demo</a>
+          </div>
+        </div>
+        <!-- Project 2 - Interactive graphic design showcase -->
+        <div class="project-card">
+          <div class="project-preview live-demo-bg color-demo"></div>
+          <div class="project-info">
+            <h3>ColorLab Studio</h3>
+            <p>Dynamic palette generator & CSS gradient tool — real time interaction, pure JS/HTML5.</p>
+            <div class="tech-badge">JavaScript</div><div class="tech-badge">Canvas</div><div class="tech-badge">CSS Variables</div>
+            <a href="‎#" class="project-link live-demo-btn" data-demo="colorLab"><i class="fas fa-external-link-alt"></i> Launch Live Demo</a>
+          </div>
+        </div>
+        <!-- Project 3 - IT support ticketing UI concept -->
+        <div class="project-card">
+          <div class="project-preview live-demo-bg support-demo"></div>
+          <div class="project-info">
+            <h3>SupportHub Lite</h3>
+            <p>Mock IT consultation ticketing dashboard & troubleshooting FAQ interface (frontend demo).</p>
+            <div class="tech-badge">HTML5</div><div class="tech-badge">Tailwind-like CSS</div><div class="tech-badge">JS</div>
+            <a href="#" class="project-link live-demo-btn" data-demo="supportHub"><i class="fas fa-external-link-alt"></i> Launch Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Graphic Gallery (enhanced with working images) -->
+<section id="gallery" class="gallery">
+  <div class="container">
+    <div class="section-header">
+      <h2>Graphic <span class="gradient-text">portfolio</span></h2>
+      <p>Visual identity, branding, business cards, typography and digital art samples</p>
+    </div>
+    <div class="gallery-filter">
+      <button class="filter-btn active" data-filter="all">All Work</button>
+      <button class="filter-btn" data-filter="logo">Logos & Marks</button>
+      <button class="filter-btn" data-filter="branding">Business Cards & Branding</button>
+      <button class="filter-btn" data-filter="typography">Typography</button>
+      <button class="filter-btn" data-filter="social">Social Media</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Gallery with JavaScript -->
+    </div>
+    <div class="gallery-note">
+      <i class="fas fa-image"></i> Click any thumbnail to view full resolution. Custom designs available upon request.
+    </div>
+  </div>
+</section>
+  <!-- Consultation & Contact area (service request form) -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info-box">
+          <h3>Get expert <span>consultation</span></h3>
+          <p>IT troubleshooting, software installation planning, web strategy — book a 30‑min free discovery call.</p>
+          <ul class="contact-details">
+            <li><i class="fas fa-envelope"></i> nondeezekiel4@gmail.com</li>
+            <li><i class="fas fa-phone-alt"></i>+260 973 777 945</li>
+            <li><i class="fab fa-skype"></i> live:nezte_ch</li>
+          </ul>
+          <div class="availability-badge"><i class="fas fa-check-circle"></i> Response within 2h</div>
+        </div>
+        <div class="contact-form-wrapper">
+          <form id="consultForm" class="consult-form">
+            <h4>Request service / consultation</h4>
+            <div class="form-row">
+              <input type="text" id="name" placeholder="Full name" required>
+              <input type="email" id="email" placeholder="Email address" required>
+            </div>
+            <select id="serviceType" required>
+              <option value="" disabled selected>Select service needed</option>
+              <option>Web Development</option>
+              <option>Graphic Design</option>
+              <option>IT Consultation</option>
+              <option>Troubleshooting / Repair</option>
+              <option>Software Installation</option>
+              <option>Backend Help</option>
+            </select>
+            <textarea rows="4" id="message" placeholder="Describe your project or IT issue..." required></textarea>
+            <button type="submit" class="btn-primary submit-btn"><i class="fas fa-paper-plane"></i> Send request</button>
+            <div id="formFeedback" class="form-feedback"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">NEZTECH<span>.</span></div>
+      <p>Java • JavaScript • HTML/CSS • Graphic Design • IT Solutions — Transforming ideas into robust digital realities.</p>
+      <div class="social-icons">
+        <a href="https://github.com/"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ezekiel-chola-7a9b86352?utm_source=share_via&utm_content=profile&utm_medium=member_android"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.behance.net/gallery/225032317/My-works"><i class="fab fa-behance"></i></a>
+        <a href="https://instagram.com/nez_tech"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="copyright">© 2025 Neztech</div>
+    </div>
+  </footer>
+
+  <!-- Modal for live projects -->
+  <div id="demoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="modalDynamicContent"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox for graphic gallery -->
+  <div id="lightboxModal" class="modal lightbox-modal">
+    <div class="modal-content lightbox-content">
+      <span class="close-lightbox">&times;</span>
+      <img id="lightboxImg" src="" alt="Full resolution graphic">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
