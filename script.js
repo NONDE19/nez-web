@@ -8,7 +8,7 @@ const EMAILJS_CONFIG = {
 // Initialize EmailJS
 if (typeof emailjs !== 'undefined') {
     emailjs.init(EMAILJS_CONFIG.publicKey);
-    console.log('✅ EmailJS initialized with correct public key');
+    console.log('✅');
 } else {
     console.warn('EmailJS library not loaded yet');
 }
@@ -81,7 +81,7 @@ if (consultForm) {
         });
     });
 }
-// ======================== FIXED MOBILE MENU TOGGLE ========================
+// FIXED MOBILE MENU TOGGLE 
 const menuToggle = document.getElementById('menuToggle');
 const navLinksMenu = document.getElementById('navLinks');
 
@@ -153,7 +153,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ======================== ACTIVE NAVIGATION ON SCROLL ========================
+//ACTIVE NAVIGATION ON SCROLL 
 const sections = document.querySelectorAll('section');
 const navItems = document.querySelectorAll('.nav-item');
 
@@ -181,7 +181,7 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
 
-// ======================== SMOOTH SCROLLING ========================
+//SMOOTH SCROLLING
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
@@ -200,7 +200,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ======================== LIVE PROJECTS DEMO MODAL ========================
+//LIVE PROJECTS DEMO MODAL 
 const demoModal = document.getElementById('demoModal');
 const modalDynamicContent = document.getElementById('modalDynamicContent');
 const closeModal = document.querySelector('.close-modal');
@@ -319,16 +319,16 @@ function showSupportHub() {
                 <h3>Frequently Asked Questions</h3>
                 <div style="margin-top: 15px;">
                     <div class="faq-item" style="margin-bottom: 10px;">
-                        <button onclick="toggleFaq(0)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔧 How do I schedule a consultation?</button>
-                        <div id="faq0" class="faq-answer" style="display: none; padding: 12px; background: #f0f0f0; border-radius: 8px; margin-top: 5px;">Simply fill out the consultation form on our contact page or email us directly at nondeezekiel4@gmail.com</div>
+                        <button onclick="toggleFaq(0)" style="width: 100%; text-align: left; padding: 12px; background: #ffffffff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔧 How do I schedule a consultation?</button>
+                        <div id="faq0" class="faq-answer" style="display: none; padding: 12px; background: #03312bff; border-radius: 8px; margin-top: 5px;">Simply fill out the consultation form on our contact page or email us directly at nondeezekiel4@gmail.com</div>
                     </div>
                     <div class="faq-item" style="margin-bottom: 10px;">
                         <button onclick="toggleFaq(1)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">💻 What software installation services do you offer?</button>
-                        <div id="faq1" class="faq-answer" style="display: none; padding: 12px; background: #f0f0f0; border-radius: 8px; margin-top: 5px;">We install IDEs, databases, servers, development tools, and business software on Windows/Linux/Mac.</div>
+                        <div id="faq1" class="faq-answer" style="display: none; padding: 12px; background: #03312bff; border-radius: 8px; margin-top: 5px;">We install IDEs, databases, servers, development tools, and business software on Windows/Linux/Mac.</div>
                     </div>
                     <div class="faq-item" style="margin-bottom: 10px;">
                         <button onclick="toggleFaq(2)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🌐 Do you offer ongoing IT support?</button>
-                        <div id="faq2" class="faq-answer" style="display: none; padding: 12px; background: #f0f0f0; border-radius: 8px; margin-top: 5px;">Yes! We provide monthly maintenance plans and on-call troubleshooting for businesses.</div>
+                        <div id="faq2" class="faq-answer" style="display: none; padding: 12px; background: #03312bff; border-radius: 8px; margin-top: 5px;">Yes! We provide monthly maintenance plans and on-call troubleshooting for businesses.</div>
                     </div>
                 </div>
             </div>
@@ -391,11 +391,10 @@ if (demoModal) {
     });
 }
 
-// ======================== GRAPHIC GALLERY (CUSTOM SVG DESIGNS) ========================
+// GRAPHIC GALLERY
 const galleryGrid = document.getElementById('galleryGrid');
 if (galleryGrid) {
     const graphicItems = [
-        // Logos & Marks
         { 
             category: 'logo', 
             title: 'NezTech Logo Suite', 
@@ -456,13 +455,13 @@ if (galleryGrid) {
                 <text x="180" y="120" text-anchor="middle" fill="#c084fc" font-size="14" font-weight="bold" font-family="Arial">SARAH CHEN</text>
                 <text x="180" y="140" text-anchor="middle" fill="#eef2ff" font-size="10" font-family="Arial">Creative Director</text>
                 <line x1="120" y1="155" x2="240" y2="155" stroke="#a855f7" stroke-width="0.5"/>
-                <text x="180" y="170" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Arial">sarah@neztech.com</text>
+                <text x="180" y="170" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Arial">sarah@chen.com</text>
                 <text x="180" y="185" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Arial">+1 (555) 123-4567</text>
                 <rect x="80" y="80" width="200" height="130" rx="10" fill="none" stroke="#a855f7" stroke-width="1" stroke-dasharray="4,4"/>
                 <rect x="320" y="80" width="200" height="130" rx="10" fill="#2a2a3a" stroke="#c084fc" stroke-width="1"/>
                 <circle cx="420" cy="145" r="25" fill="none" stroke="#c084fc" stroke-width="2"/>
                 <text x="420" y="140" text-anchor="middle" fill="#c084fc" font-size="20" font-weight="bold">N</text>
-                <text x="420" y="160" text-anchor="middle" fill="#9ca3af" font-size="8">neztech.design</text>
+                <text x="420" y="160" text-anchor="middle" fill="#9ca3af" font-size="8">sara.design</text>
                 <text x="300" y="260" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="bold">Premium Business Card Set</text>
                 <text x="300" y="280" text-anchor="middle" fill="#9ca3af" font-size="10">Matte finish • Foil accents • Custom box</text>
             </svg>`
@@ -475,9 +474,9 @@ if (galleryGrid) {
                 <rect width="600" height="500" fill="#0a0a0f"/>
                 <rect x="100" y="100" width="400" height="160" rx="12" fill="#13131c" stroke="#2d2d3a" stroke-width="1"/>
                 <rect x="100" y="100" width="8" height="160" fill="#a855f7" rx="4"/>
-                <text x="140" y="145" fill="#eef2ff" font-size="28" font-weight="bold" font-family="Arial">JAMES WILSON</text>
+                <text x="140" y="145" fill="#eef2ff" font-size="28" font-weight="bold" font-family="Arial">EZECHIEL NONDE</text>
                 <text x="140" y="170" fill="#c084fc" font-size="12" font-family="Arial" letter-spacing="2">FULL STACK DEVELOPER</text>
-                <text x="140" y="195" fill="#9ca3af" font-size="10" font-family="Arial">james.wilson@devstudio.com</text>
+                <text x="140" y="195" fill="#9ca3af" font-size="10" font-family="Arial">ezekiel.neztech@devstudio.com</text>
                 <text x="140" y="213" fill="#9ca3af" font-size="10" font-family="Arial">+1 (555) 987-6543</text>
                 <circle cx="440" cy="180" r="30" fill="none" stroke="#a855f7" stroke-width="1.5"/>
                 <text x="440" y="177" text-anchor="middle" fill="#a855f7" font-size="24" font-weight="bold">&lt;/&gt;</text>
@@ -784,7 +783,7 @@ if (galleryGrid) {
 }
 
 
-// ======================== ADDITIONAL HELPER FUNCTIONS ========================
+//ADDITIONAL HELPER FUNCTIONS 
 window.addEventListener('resize', function() {
     if (window.innerWidth > 768 && navLinksMenu && navLinksMenu.classList.contains('active')) {
         navLinksMenu.classList.remove('active');

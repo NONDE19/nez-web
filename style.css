@@ -534,7 +534,7 @@ h1, h2, h3, h4 {
 
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 20px;
 }
@@ -543,7 +543,7 @@ h1, h2, h3, h4 {
 .consult-form select,
 .consult-form textarea {
     width: 100%;
-    padding: 14px 20px;
+    padding: 4px 0px;
     background: #1a1a24;
     border: 1px solid #2d2d3a;
     border-radius: 24px;
@@ -856,4 +856,122 @@ footer {
     font-size: 0.7rem;
     opacity: 0.9;
     display: block;
+}
+
+/* Prevent horizontal overflow globally */
+html, body {
+    overflow-x: hidden;
+}
+
+
+* {
+    max-width: 100%;
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0 16px !important;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr !important;
+        padding: 24px !important;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-wrapper {
+        padding: 16px !important;
+        border-radius: 20px;
+    }
+}
+
+
+.contact-form-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+.consult-form input,
+.consult-form select,
+.consult-form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 16px; 
+}
+
+
+.consult-form input,
+.consult-form textarea {
+    word-wrap: break-word;
+}
+
+
+.navbar {
+    padding: 16px 20px;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 60px 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .services-grid,
+    .projects-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 16px;
+    }
+}
+
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.hero-buttons {
+    flex-wrap: wrap;
+}
+
+
+.contact-wrapper,
+.services-grid,
+.projects-grid {
+    overflow: hidden;
+}
+
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
 }
