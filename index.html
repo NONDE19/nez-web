@@ -16,31 +16,28 @@
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-
-
-      <div class="logo"><span class="logo-highlight">&lt;/&gt;</span> NEZTECH<span class="dot">.</span></div>
-                    <!-- Dark/Light Mode Toggle Button -->
-<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
-    <i class="fas fa-sun"></i>
-    <i class="fas fa-moon"></i>
-    <span class="toggle-ball"></span>
-</button>
-      <ul class="nav-links" id="navLinks">
+    <div class="logo"><span class="logo-highlight">&lt;/&gt;</span> NEZTECH<span class="dot">.</span></div>
+    
+    <ul class="nav-links" id="navLinks">
         <li><a href="#home" class="nav-item active">Home</a></li>
         <li><a href="#services" class="nav-item">Services</a></li>
         <li><a href="#projects" class="nav-item">Live Projects</a></li>
         <li><a href="#gallery" class="nav-item">Graphic Gallery</a></li>
         <li><a href="#contact" class="nav-item">Consultation</a></li>
-      </ul>
-      <div class="menu-toggle" id="menuToggle">
-
-        <i class="fas fa-bars"></i>
-
-      </div>
-
-
+    </ul>
+    
+    <!-- Right side group -->
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="toggle-ball"></span>
+        </button>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
     </div>
-  </nav>
+</div>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
@@ -134,7 +131,7 @@
           <div class="project-preview live-demo-bg support-demo"></div>
           <div class="project-info">
             <h3>SupportHub Lite</h3>
-            <p>Troubleshooting FAQ interface (frontend demo).</p>
+            <p> IT support ticketing simulator. Create, track, and resolve tickets.</p>
             <div class="tech-badge">HTML5</div><div class="tech-badge">Tailwind-like CSS</div><div class="tech-badge">JS</div>
             <a href="#" class="project-link live-demo-btn" data-demo="supportHub"><i class="fas fa-external-link-alt"></i> Launch Live Demo</a>
           </div>
@@ -219,14 +216,13 @@
     </div>
   </footer>
 
-  <!-- Modal for live projects -->
-  <div id="demoModal" class="modal">
+<!-- Modal for live projects (dynamic popup) -->
+<div id="demoModal" class="modal">
     <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <div id="modalDynamicContent"></div>
+        <span class="close-modal">&times;</span>
+        <div id="modalDynamicContent"></div>
     </div>
-  </div>
-
+</div>
   <!-- Lightbox for graphic gallery -->
   <div id="lightboxModal" class="modal lightbox-modal">
     <div class="modal-content lightbox-content">

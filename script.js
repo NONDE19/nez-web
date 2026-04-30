@@ -5,9 +5,10 @@ const EMAILJS_CONFIG = {
     publicKey: "Tv2O3c2hwTzhhg7f"
 };
 
-// Initialize EmailJS
+// Initialize EmailJS (using version 3 syntax)
 if (typeof emailjs !== 'undefined') {
     emailjs.init(EMAILJS_CONFIG.publicKey);
+    console.log("EmailJS initialized");
 }
 
 // ======================== DARK/LIGHT MODE TOGGLE ========================
@@ -15,7 +16,6 @@ function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
     if (!themeToggle) return;
     
-    // Check for saved user preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -29,7 +29,6 @@ function initThemeToggle() {
         document.body.classList.add('light-mode');
     }
     
-    // Toggle theme function
     function toggleTheme() {
         if (document.body.classList.contains('light-mode')) {
             document.body.classList.remove('light-mode');
@@ -53,7 +52,6 @@ function initMobileMenu() {
     function toggleMobileMenu() {
         navLinksMenu.classList.toggle('active');
         
-        // Change icon between bars and times
         const icon = menuToggle.querySelector('i');
         if (icon) {
             if (navLinksMenu.classList.contains('active')) {
@@ -70,7 +68,6 @@ function initMobileMenu() {
     
     menuToggle.addEventListener('click', toggleMobileMenu);
     
-    // Close mobile menu when clicking a nav link
     document.querySelectorAll('.nav-item').forEach(link => {
         link.addEventListener('click', () => {
             navLinksMenu.classList.remove('active');
@@ -83,7 +80,6 @@ function initMobileMenu() {
         });
     });
     
-    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         if (navLinksMenu.classList.contains('active')) {
             const isClickInsideMenu = navLinksMenu.contains(e.target);
@@ -155,7 +151,7 @@ function initSmoothScroll() {
     });
 }
 
-// ======================== GRAPHIC GALLERY ========================
+// ======================== GRAPHIC GALLERY WITH FILTERS ========================
 function initGallery() {
     const galleryGrid = document.getElementById('galleryGrid');
     if (!galleryGrid) return;
@@ -185,6 +181,34 @@ function initGallery() {
         galleryItem.setAttribute('data-desc', item.description);
         galleryItem.innerHTML = `<div class="svg-container">${item.svg}</div><div class="overlay"><i class="fas fa-search-plus"></i><div class="overlay-text"><strong>${item.title}</strong><small>${item.description}</small></div></div>`;
         galleryGrid.appendChild(galleryItem);
+    });
+    
+    // Initialize gallery filters
+    initGalleryFilters();
+}
+
+// Gallery Filter Function
+function initGalleryFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filterValue = btn.getAttribute('data-filter');
+            
+            galleryItems.forEach(item => {
+                if (filterValue === 'all') {
+                    item.style.display = 'block';
+                } else if (item.classList.contains(filterValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
     });
 }
 
@@ -237,7 +261,6 @@ function initLightbox() {
     if (closeLightbox) closeLightbox.addEventListener('click', closeLightboxModal);
     window.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightboxModal(); });
     
-    // Attach click listeners to gallery items
     document.querySelectorAll('.gallery-item').forEach(item => {
         item.addEventListener('click', () => {
             const title = item.getAttribute('data-title') || 'Design Sample';
@@ -250,166 +273,165 @@ function initLightbox() {
 }
 
 // ======================== LIVE DEMO MODAL SYSTEM ========================
-const demoModal = document.getElementById('demoModal');
-const modalDynamicContent = document.getElementById('modalDynamicContent');
-const closeModalBtn = document.querySelector('#demoModal .close-modal');
-
-// Demo content definitions
-const demos = {
-    taskManager: {
-        title: '📋 TaskFlow Manager - Live Demo',
-        html: `
-            <div style="padding: 20px;">
-                <h3 style="color: #c084fc; margin-bottom: 20px;">TaskFlow Manager (Java + Spring Boot Style)</h3>
-                <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
-                    <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-                        <input type="text" id="taskInput" placeholder="Add a new task..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; min-width: 200px;">
-                        <button onclick="window.addDemoTask()" style="background: #a855f7; border: none; padding: 12px 24px; border-radius: 40px; color: white; cursor: pointer; transition: 0.2s;">➕ Add Task</button>
-                    </div>
-                    <ul id="taskList" style="list-style: none; padding: 0;">
-                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
-                            <span>📌 Complete project documentation</span>
-                            <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
-                        </li>
-                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
-                            <span>🎨 Design homepage wireframe</span>
-                            <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
-                        </li>
-                    </ul>
-                    <p style="margin-top: 16px; font-size: 0.85rem; color: #9ca3af;"><i class="fas fa-info-circle"></i> Interactive demo: Add/delete tasks (frontend simulation)</p>
-                </div>
-            </div>
-        `
-    },
-    colorLab: {
-        title: '🎨 ColorLab Studio - Interactive Gradient Tool',
-        html: `
-            <div style="padding: 20px;">
-                <h3 style="color: #c084fc; margin-bottom: 20px;">Live CSS Gradient Generator</h3>
-                <div id="gradientPreview" style="height: 150px; border-radius: 24px; background: linear-gradient(135deg, #a855f7, #ec4899); margin-bottom: 20px; transition: 0.2s;"></div>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <div style="flex: 1;">
-                        <label style="display: block; margin-bottom: 8px;">Color 1</label>
-                        <input type="color" id="color1" value="#a855f7" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
-                    </div>
-                    <div style="flex: 1;">
-                        <label style="display: block; margin-bottom: 8px;">Color 2</label>
-                        <input type="color" id="color2" value="#ec4899" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
-                    </div>
-                </div>
-                <p id="gradientCode" style="margin-top: 16px; background: #0a0a0f; padding: 12px; border-radius: 12px; font-family: monospace; font-size: 0.85rem; word-break: break-all;">background: linear-gradient(135deg, #a855f7, #ec4899);</p>
-            </div>
-        `
-    },
-    supportHub: {
-        title: '🎫 SupportHub Lite - IT Consultation Demo',
-        html: `
-            <div style="padding: 20px;">
-                <h3 style="color: #c084fc; margin-bottom: 20px;">IT Support Ticket Simulator</h3>
-                <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
-                    <div style="margin-bottom: 16px;">
-                        <input type="text" id="ticketIssue" placeholder="Describe your IT issue..." style="width: 100%; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; margin-bottom: 12px;">
-                        <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 10px 24px; border-radius: 40px; color: white; cursor: pointer;">📨 Create Ticket</button>
-                    </div>
-                    <div>
-                        <h4 style="margin-bottom: 12px;">Active Tickets:</h4>
-                        <ul id="ticketList" style="list-style: none; padding: 0;">
-                            <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">⚠️ Server response timeout - In progress</li>
-                            <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">🖥️ Software installation pending</li>
+function initLiveDemos() {
+    const demoModal = document.getElementById('demoModal');
+    const modalDynamicContent = document.getElementById('modalDynamicContent');
+    const closeModalBtn = document.querySelector('#demoModal .close-modal');
+    
+    if (!demoModal || !modalDynamicContent) {
+        console.log("Demo modal elements not found");
+        return;
+    }
+    
+    const demos = {
+        taskManager: {
+            title: '📋 TaskFlow Manager - Live Demo',
+            html: `
+                <div style="padding: 20px;">
+                    <h3 style="color: #c084fc; margin-bottom: 20px;">TaskFlow Manager</h3>
+                    <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
+                        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+                            <input type="text" id="taskInput" placeholder="Add a new task..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; min-width: 200px;">
+                            <button onclick="window.addDemoTask()" style="background: #a855f7; border: none; padding: 12px 24px; border-radius: 40px; color: white; cursor: pointer;">➕ Add Task</button>
+                        </div>
+                        <ul id="taskList" style="list-style: none; padding: 0;">
+                            <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
+                                <span>📌 Complete project documentation</span>
+                                <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
+                                <span>🎨 Design homepage wireframe</span>
+                                <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
+                            </li>
                         </ul>
+                        <p style="margin-top: 16px; font-size: 0.85rem; color: #9ca3af;"><i class="fas fa-info-circle"></i> Interactive demo: Add/delete tasks</p>
                     </div>
                 </div>
-            </div>
-        `
-    }
-};
-
-// Define global functions for demo interactions
-window.addDemoTask = function() {
-    const input = document.getElementById('taskInput');
-    const taskList = document.getElementById('taskList');
-    if (input && taskList && input.value.trim()) {
-        const li = document.createElement('li');
-        li.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;';
-        li.innerHTML = '<span>📌 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>';
-        taskList.appendChild(li);
-        input.value = '';
-    }
-};
-
-window.createSupportTicket = function() {
-    const input = document.getElementById('ticketIssue');
-    const ticketList = document.getElementById('ticketList');
-    if (input && ticketList && input.value.trim()) {
-        const li = document.createElement('li');
-        li.style.cssText = 'background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
-        li.innerHTML = '<span>🔧 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 2px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>';
-        ticketList.appendChild(li);
-        input.value = '';
-    }
-};
-
-// Color lab gradient update function (will be set after modal opens)
-function setupColorLab() {
-    const color1 = document.getElementById('color1');
-    const color2 = document.getElementById('color2');
-    const preview = document.getElementById('gradientPreview');
-    const code = document.getElementById('gradientCode');
-    if (color1 && color2 && preview && code) {
-        const updateGradient = () => {
-            const grad = linear-gradient(135deg, ${color1.value}, ${color2.value});
-            preview.style.background = grad;
-            code.textContent = background: ${grad};;
-        };
-        color1.addEventListener('input', updateGradient);
-        color2.addEventListener('input', updateGradient);
-    }
-}
-
-// Attach click listeners to live demo buttons
-function attachDemoListeners() {
-    document.querySelectorAll('.live-demo-btn').forEach(btn => {
-        btn.removeEventListener('click', handleDemoClick);
-        btn.addEventListener('click', handleDemoClick);
-    });
-}
-
-function handleDemoClick(e) {
-    e.preventDefault();
-    const demoType = this.getAttribute('data-demo');
-    if (demos[demoType]) {
-        modalDynamicContent.innerHTML = demos[demoType].html;
-        demoModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        // Setup color lab specific functionality if needed
-        if (demoType === 'colorLab') {
-            setTimeout(setupColorLab, 50);
+            `
+        },
+        colorLab: {
+            title: '🎨 ColorLab Studio - Gradient Tool',
+            html: `
+                <div style="padding: 20px;">
+                    <h3 style="color: #c084fc; margin-bottom: 20px;">Live CSS Gradient Generator</h3>
+                    <div id="gradientPreview" style="height: 150px; border-radius: 24px; background: linear-gradient(135deg, #a855f7, #ec4899); margin-bottom: 20px;"></div>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <div style="flex: 1;">
+                            <label>Color 1</label>
+                            <input type="color" id="color1" value="#a855f7" style="width: 100%; height: 50px; border-radius: 12px;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Color 2</label>
+                            <input type="color" id="color2" value="#ec4899" style="width: 100%; height: 50px; border-radius: 12px;">
+                        </div>
+                    </div>
+                    <p id="gradientCode" style="margin-top: 16px; background: #0a0a0f; padding: 12px; border-radius: 12px; font-family: monospace;">background: linear-gradient(135deg, #a855f7, #ec4899);</p>
+                </div>
+            `
+        },
+        supportHub: {
+            title: '🎫 SupportHub Lite - IT Demo',
+            html: `
+                <div style="padding: 20px;">
+                    <h3 style="color: #c084fc; margin-bottom: 20px;">IT Support Ticket Simulator</h3>
+                    <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
+                        <div style="margin-bottom: 16px;">
+                            <input type="text" id="ticketIssue" placeholder="Describe your IT issue..." style="width: 100%; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; margin-bottom: 12px;">
+                            <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 10px 24px; border-radius: 40px; color: white; cursor: pointer;">📨 Create Ticket</button>
+                        </div>
+                        <div>
+                            <h4>Active Tickets:</h4>
+                            <ul id="ticketList" style="list-style: none; padding: 0;">
+                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">⚠️ Server response timeout</li>
+                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">🖥️ Software installation pending</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `
         }
-    } else {
-        alert('Demo content loading. Please try again.');
-    }
-}
-
-function closeDemoModal() {
-    if (demoModal) {
+    };
+    
+    window.addDemoTask = function() {
+        const input = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+        if (input && taskList && input.value.trim()) {
+            const li = document.createElement('li');
+            li.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;';
+            li.innerHTML = '<span>📌 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>';
+            taskList.appendChild(li);
+            input.value = '';
+        }
+    };
+    
+    window.createSupportTicket = function() {
+        const input = document.getElementById('ticketIssue');
+        const ticketList = document.getElementById('ticketList');
+        if (input && ticketList && input.value.trim()) {
+            const li = document.createElement('li');
+            li.style.cssText = 'background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
+            li.innerHTML = '<span>🔧 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 2px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>';
+            ticketList.appendChild(li);
+            input.value = '';
+        }
+    };
+    
+    window.setupColorLab = function() {
+        const color1 = document.getElementById('color1');
+        const color2 = document.getElementById('color2');
+        const preview = document.getElementById('gradientPreview');
+        const code = document.getElementById('gradientCode');
+        if (color1 && color2 && preview && code) {
+            const updateGradient = () => {
+                const grad = `linear-gradient(135deg, ${color1.value}, ${color2.value})`;
+                preview.style.background = grad;
+                code.textContent = `background: ${grad};`;
+            };
+            color1.addEventListener('input', updateGradient);
+            color2.addEventListener('input', updateGradient);
+        }
+    };
+    
+    function closeDemoModal() {
         demoModal.style.display = 'none';
         document.body.style.overflow = '';
     }
-}
-
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeDemoModal);
-}
-
-window.addEventListener('click', (e) => {
-    if (e.target === demoModal) {
-        closeDemoModal();
+    
+    function handleDemoClick(e) {
+        e.preventDefault();
+        const demoType = this.getAttribute('data-demo');
+        console.log("Demo clicked:", demoType);
+        if (demos[demoType]) {
+            modalDynamicContent.innerHTML = demos[demoType].html;
+            demoModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            if (demoType === 'colorLab') {
+                setTimeout(window.setupColorLab, 100);
+            }
+        } else {
+            alert('Demo not available');
+        }
     }
-});
-
-
-
+    
+    function attachDemoListeners() {
+        const demoButtons = document.querySelectorAll('.live-demo-btn');
+        console.log("Found demo buttons:", demoButtons.length);
+        demoButtons.forEach(btn => {
+            btn.removeEventListener('click', handleDemoClick);
+            btn.addEventListener('click', handleDemoClick);
+        });
+    }
+    
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeDemoModal);
+    }
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === demoModal) closeDemoModal();
+    });
+    
+    attachDemoListeners();
+}
 
 // ======================== CONSULTATION FORM ========================
 function initContactForm() {
@@ -460,6 +482,7 @@ function initContactForm() {
             }
             consultForm.reset();
         } catch (error) {
+            console.error("EmailJS error:", error);
             if (formFeedback) {
                 formFeedback.style.color = '#f87171';
                 formFeedback.innerHTML = '⚠️ Failed to send. Please email directly.';
@@ -474,12 +497,14 @@ function initContactForm() {
 
 // ======================== INITIALIZE EVERYTHING ========================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded, initializing all features...");
     initThemeToggle();
     initMobileMenu();
     initActiveNav();
     initSmoothScroll();
     initGallery();
     initLightbox();
+    initLiveDemos();      // ADDED - this was missing!
     initContactForm();
     console.log('✅ All features initialized successfully!');
 });
