@@ -106,7 +106,7 @@ h1, h2, h3, h4 {
     backdrop-filter: blur(14px);
     z-index: 1000;
     border-bottom: 1px solid #1f1f2e;
-    padding: 18px 32px;
+    padding: 30px 32px;
 }
 
 .nav-container {
@@ -134,6 +134,7 @@ h1, h2, h3, h4 {
     display: flex;
     gap: 32px;
     list-style: none;
+  margin-right: 20px;
 }
 
 .nav-item {
@@ -160,8 +161,8 @@ h1, h2, h3, h4 {
     border: 1px solid #a855f7;
     border-radius: 40px;
     cursor: pointer;
-    width: 60px;
-    height: 30px;
+    width: 53px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -187,18 +188,19 @@ h1, h2, h3, h4 {
 
 .toggle-ball {
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 21px;
     background: linear-gradient(135deg, #a855f7, #7c3aed);
     border-radius: 50%;
     left: 3px;
+    right: 3px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* Light mode ball position */
 body.light-mode .toggle-ball {
-    transform: translateX(30px);
+    transform: translateX(23px);
 }
 
 /* Light mode styles */
@@ -241,7 +243,11 @@ body.light-mode .section-header p {
 }
 
 body.light-mode .hero-content p {
-    color: #334155;
+    color: #b3b3b3;
+}
+
+body.light-mode .hero-content h1{
+    color:#b3b3b3;
 }
 
 body.light-mode .tech-stack span {
@@ -358,7 +364,7 @@ body.light-mode .tech-badge {
 /* Responsive toggle position */
 @media (max-width: 900px) {
     .theme-toggle {
-        margin-left: auto;
+        margin-left: 20px;
         margin-right: 15px;
     }
 }
