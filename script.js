@@ -5,7 +5,7 @@ const EMAILJS_CONFIG = {
     publicKey: "Tv2O3c2hwTzhhg7f"
 };
 
-// Initialize EmailJS (using version 3 syntax)
+// Initialize EmailJS
 if (typeof emailjs !== 'undefined') {
     emailjs.init(EMAILJS_CONFIG.publicKey);
     console.log("EmailJS initialized");
@@ -133,9 +133,16 @@ function initActiveNav() {
 // ======================== SMOOTH SCROLLING ========================
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#' || href === '#home' || href === 'javascript:void(0)' || 
+            href.startsWith('javascript:') || anchor.classList.contains('live-demo-btn')) {
+            return;
+        }
+        
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
-            if (targetId === '#' || targetId === '#home') return;
+            if (!targetId || targetId === '#') return;
+            
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
@@ -151,7 +158,7 @@ function initSmoothScroll() {
     });
 }
 
-// ======================== GRAPHIC GALLERY WITH FILTERS ========================
+// ======================== GRAPHIC GALLERY ========================
 function initGallery() {
     const galleryGrid = document.getElementById('galleryGrid');
     if (!galleryGrid) return;
@@ -174,6 +181,7 @@ function initGallery() {
         }
     ];
     
+    galleryGrid.innerHTML = '';
     graphicItems.forEach(item => {
         const galleryItem = document.createElement('div');
         galleryItem.className = `gallery-item ${item.category}`;
@@ -183,11 +191,9 @@ function initGallery() {
         galleryGrid.appendChild(galleryItem);
     });
     
-    // Initialize gallery filters
     initGalleryFilters();
 }
 
-// Gallery Filter Function
 function initGalleryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -198,7 +204,6 @@ function initGalleryFilters() {
             btn.classList.add('active');
             
             const filterValue = btn.getAttribute('data-filter');
-            
             galleryItems.forEach(item => {
                 if (filterValue === 'all') {
                     item.style.display = 'block';
@@ -229,37 +234,15 @@ function initLightbox() {
         if (lightboxImg) lightboxImg.style.display = 'block';
     }
     
-    function openLightbox(title, description, svgContent) {
-        lightboxModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        if (lightboxImg) lightboxImg.style.display = 'none';
-        
-        const existingSvgContainer = document.querySelector('#lightboxSvgContainer');
-        if (existingSvgContainer) existingSvgContainer.remove();
-        
-        const svgContainerDiv = document.createElement('div');
-        svgContainerDiv.id = 'lightboxSvgContainer';
-        svgContainerDiv.style.width = '100%';
-        svgContainerDiv.style.maxHeight = '80vh';
-        svgContainerDiv.style.display = 'flex';
-        svgContainerDiv.style.justifyContent = 'center';
-        svgContainerDiv.style.alignItems = 'center';
-        svgContainerDiv.innerHTML = svgContent;
-        
-        const svgElem = svgContainerDiv.querySelector('svg');
-        if (svgElem) {
-            svgElem.style.maxWidth = '90%';
-            svgElem.style.maxHeight = '80vh';
-            svgElem.style.width = 'auto';
-        }
-        
-        const lightboxContent = lightboxModal.querySelector('.lightbox-content');
-        if (lightboxContent) lightboxContent.appendChild(svgContainerDiv);
-        if (lightboxCaption) lightboxCaption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 0.85rem; color: #c084fc;">${description}</span>`;
+    window.closeLightboxModal = closeLightboxModal;
+    
+    if (closeLightbox) {
+        closeLightbox.addEventListener('click', closeLightboxModal);
     }
     
-    if (closeLightbox) closeLightbox.addEventListener('click', closeLightboxModal);
-    window.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightboxModal(); });
+    window.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) closeLightboxModal();
+    });
     
     document.querySelectorAll('.gallery-item').forEach(item => {
         item.addEventListener('click', () => {
@@ -267,7 +250,33 @@ function initLightbox() {
             const desc = item.getAttribute('data-desc') || '';
             const svgContainer = item.querySelector('.svg-container');
             const svgContent = svgContainer ? svgContainer.innerHTML : '';
-            openLightbox(title, desc, svgContent);
+            
+            lightboxModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            if (lightboxImg) lightboxImg.style.display = 'none';
+            
+            const existingSvgContainer = document.querySelector('#lightboxSvgContainer');
+            if (existingSvgContainer) existingSvgContainer.remove();
+            
+            const svgContainerDiv = document.createElement('div');
+            svgContainerDiv.id = 'lightboxSvgContainer';
+            svgContainerDiv.style.width = '100%';
+            svgContainerDiv.style.maxHeight = '80vh';
+            svgContainerDiv.style.display = 'flex';
+            svgContainerDiv.style.justifyContent = 'center';
+            svgContainerDiv.style.alignItems = 'center';
+            svgContainerDiv.innerHTML = svgContent;
+            
+            const svgElem = svgContainerDiv.querySelector('svg');
+            if (svgElem) {
+                svgElem.style.maxWidth = '90%';
+                svgElem.style.maxHeight = '80vh';
+                svgElem.style.width = 'auto';
+            }
+            
+            const lightboxContent = lightboxModal.querySelector('.lightbox-content');
+            if (lightboxContent) lightboxContent.appendChild(svgContainerDiv);
+            if (lightboxCaption) lightboxCaption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 0.85rem; color: #c084fc;">${desc}</span>`;
         });
     });
 }
@@ -276,7 +285,6 @@ function initLightbox() {
 function initLiveDemos() {
     const demoModal = document.getElementById('demoModal');
     const modalDynamicContent = document.getElementById('modalDynamicContent');
-    const closeModalBtn = document.querySelector('#demoModal .close-modal');
     
     if (!demoModal || !modalDynamicContent) {
         console.log("Demo modal elements not found");
@@ -330,7 +338,7 @@ function initLiveDemos() {
             `
         },
         supportHub: {
-            title: '🎫 SupportHub Lite - IT Consultation & Troubleshooting Demo',
+            title: '🎫 SupportHub Lite - IT Consultation Demo',
             html: `
                 <div style="padding: 20px;">
                     <div style="text-align: center; margin-bottom: 25px;">
@@ -340,53 +348,35 @@ function initLiveDemos() {
                         <h3 style="color: #c084fc; margin-bottom: 10px;">IT Support Ticket System</h3>
                         <p style="color: #9ca3af; font-size: 14px;">Professional IT consultation, troubleshooting, and support ticketing demo</p>
                     </div>
-                    
                     <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
                         <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; color: #eef2ff; font-weight: 500;">
-                                <i class="fas fa-pen-alt" style="color: #a855f7; margin-right: 8px;"></i> Create New Support Ticket
-                            </label>
+                            <label style="display: block; margin-bottom: 8px; color: #eef2ff; font-weight: 500;">Create New Support Ticket</label>
                             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                                 <input type="text" id="ticketIssue" placeholder="Describe your technical issue..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white;">
-                                <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 12px 28px; border-radius: 40px; color: white; cursor: pointer; font-weight: 600;">
-                                    <i class="fas fa-ticket-alt"></i> Submit Ticket
-                                </button>
+                                <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 12px 28px; border-radius: 40px; color: white; cursor: pointer;">Submit Ticket</button>
                             </div>
                         </div>
-                        
                         <div>
-                            <h4 style="margin-bottom: 15px; color: #c084fc;">
-                                <i class="fas fa-list-check"></i> Active Support Tickets
-                            </h4>
-                            <div style="max-height: 250px; overflow-y: auto;">
-                                <ul id="ticketList" style="list-style: none; padding: 0;">
-                                    <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                        <span><span style="color: #fbbf24;">⚠️</span> Server response timeout - Priority: High</span>
-                                        <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>
-                                    </li>
-                                    <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                        <span><span style="color: #fbbf24;">🖥️</span> Software installation - Windows 11 Update</span>
-                                        <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h4 style="margin-bottom: 15px; color: #c084fc;">Active Support Tickets</h4>
+                            <ul id="ticketList" style="list-style: none; padding: 0;">
+                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>⚠️ Server response timeout - Priority: High</span>
+                                    <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>
+                                </li>
+                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>🖥️ Software installation - Windows 11 Update</span>
+                                    <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    
-                    <div style="margin-top: 20px; padding: 12px; background: rgba(168, 85, 247, 0.1); border-radius: 12px; text-align: center;">
-                        <p style="font-size: 0.8rem; color: #c084fc;">
-                            <i class="fas fa-clock"></i> Average response time: &lt; 2 hours | 24/7 IT Support Available
-                        </p>
                     </div>
                 </div>
             `
         }
     };
     
-    // Store scroll position to prevent page jump
     let savedScrollPosition = 0;
     
-    // Global functions for demo interactions
     window.addDemoTask = function() {
         const input = document.getElementById('taskInput');
         const taskList = document.getElementById('taskList');
@@ -405,7 +395,7 @@ function initLiveDemos() {
         if (input && ticketList && input.value.trim()) {
             const li = document.createElement('li');
             li.style.cssText = 'background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
-            li.innerHTML = '<span><span style="color: #fbbf24;">🎫</span> ' + input.value.trim() + ' - Awaiting response</span><button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>';
+            li.innerHTML = '<span>🎫 ' + input.value.trim() + ' - Awaiting response</span><button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>';
             ticketList.appendChild(li);
             input.value = '';
         }
@@ -427,38 +417,27 @@ function initLiveDemos() {
         }
     };
     
-    // Function to open modal without page jump
     function openDemoModal() {
         savedScrollPosition = window.scrollY;
         demoModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${savedScrollPosition}px`;
-        document.body.style.width = '100%';
     }
     
-    // Function to close modal and restore scroll position
     function closeDemoModal() {
         demoModal.style.display = 'none';
         document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
         window.scrollTo(0, savedScrollPosition);
     }
     
-    // Handle demo button click
     function handleDemoClick(e) {
         e.preventDefault();
         e.stopPropagation();
-        
         const demoType = this.getAttribute('data-demo');
         console.log("Demo clicked:", demoType);
         
         if (demos[demoType]) {
             modalDynamicContent.innerHTML = demos[demoType].html;
             openDemoModal();
-            
             if (demoType === 'colorLab') {
                 setTimeout(window.setupColorLab, 100);
             }
@@ -467,49 +446,34 @@ function initLiveDemos() {
         }
     }
     
-    // Attach listeners to all demo buttons
     function attachDemoListeners() {
         const demoButtons = document.querySelectorAll('.live-demo-btn');
         console.log("Found demo buttons:", demoButtons.length);
         demoButtons.forEach(btn => {
-            // Remove existing listener to avoid duplicates
             btn.removeEventListener('click', handleDemoClick);
             btn.addEventListener('click', handleDemoClick);
-            // DO NOT modify the href attribute - let the click handler do its job
         });
     }
     
-    // Close button listener
+    const closeModalBtn = demoModal.querySelector('.close-modal');
     if (closeModalBtn) {
-        closeModalBtn.removeEventListener('click', closeDemoModal);
         closeModalBtn.addEventListener('click', closeDemoModal);
     }
     
-    // Close modal when clicking outside
     window.addEventListener('click', (e) => {
-        if (e.target === demoModal) {
-            closeDemoModal();
-        }
+        if (e.target === demoModal) closeDemoModal();
     });
     
-    // Close modal with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && demoModal.style.display === 'block') {
             closeDemoModal();
         }
     });
     
-    // Initial attachment
     attachDemoListeners();
-    
-    // Re-attach for dynamically loaded content
-    const observer = new MutationObserver(function() {
-        attachDemoListeners();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    
     console.log("Live demos initialized successfully");
 }
+
 // ======================== CONSULTATION FORM ========================
 function initContactForm() {
     const consultForm = document.getElementById('consultForm');
@@ -547,7 +511,7 @@ function initContactForm() {
         submitBtn.disabled = true;
         
         try {
-            const response = await emailjs.send(
+            await emailjs.send(
                 EMAILJS_CONFIG.serviceID,
                 EMAILJS_CONFIG.templateID,
                 { from_name: name, from_email: email, service_type: serviceType, message: message },
@@ -581,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initGallery();
     initLightbox();
-    initLiveDemos();      // ADDED - this was missing!
+    initLiveDemos();
     initContactForm();
     console.log('✅ All features initialized successfully!');
 });
