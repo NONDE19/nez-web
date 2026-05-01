@@ -317,41 +317,76 @@ function initLiveDemos() {
                     <div id="gradientPreview" style="height: 150px; border-radius: 24px; background: linear-gradient(135deg, #a855f7, #ec4899); margin-bottom: 20px;"></div>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <div style="flex: 1;">
-                            <label>Color 1</label>
-                            <input type="color" id="color1" value="#a855f7" style="width: 100%; height: 50px; border-radius: 12px;">
+                            <label style="color: #eef2ff; margin-bottom: 8px; display: block;">Color 1</label>
+                            <input type="color" id="color1" value="#a855f7" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
                         </div>
                         <div style="flex: 1;">
-                            <label>Color 2</label>
-                            <input type="color" id="color2" value="#ec4899" style="width: 100%; height: 50px; border-radius: 12px;">
+                            <label style="color: #eef2ff; margin-bottom: 8px; display: block;">Color 2</label>
+                            <input type="color" id="color2" value="#ec4899" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
                         </div>
                     </div>
-                    <p id="gradientCode" style="margin-top: 16px; background: #0a0a0f; padding: 12px; border-radius: 12px; font-family: monospace;">background: linear-gradient(135deg, #a855f7, #ec4899);</p>
+                    <p id="gradientCode" style="margin-top: 16px; background: #0a0a0f; padding: 12px; border-radius: 12px; font-family: monospace; font-size: 0.85rem;">background: linear-gradient(135deg, #a855f7, #ec4899);</p>
                 </div>
             `
         },
         supportHub: {
-            title: '🎫 SupportHub Lite - IT Demo',
+            title: '🎫 SupportHub Lite - IT Consultation & Troubleshooting Demo',
             html: `
                 <div style="padding: 20px;">
-                    <h3 style="color: #c084fc; margin-bottom: 20px;">IT Support Ticket Simulator</h3>
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <div style="background: linear-gradient(135deg, #a855f7, #7c3aed); width: 60px; height: 60px; border-radius: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <i class="fas fa-headset" style="font-size: 30px; color: white;"></i>
+                        </div>
+                        <h3 style="color: #c084fc; margin-bottom: 10px;">IT Support Ticket System</h3>
+                        <p style="color: #9ca3af; font-size: 14px;">Professional IT consultation, troubleshooting, and support ticketing demo</p>
+                    </div>
+                    
                     <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
-                        <div style="margin-bottom: 16px;">
-                            <input type="text" id="ticketIssue" placeholder="Describe your IT issue..." style="width: 100%; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; margin-bottom: 12px;">
-                            <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 10px 24px; border-radius: 40px; color: white; cursor: pointer;">📨 Create Ticket</button>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; color: #eef2ff; font-weight: 500;">
+                                <i class="fas fa-pen-alt" style="color: #a855f7; margin-right: 8px;"></i> Create New Support Ticket
+                            </label>
+                            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                                <input type="text" id="ticketIssue" placeholder="Describe your technical issue..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white;">
+                                <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 12px 28px; border-radius: 40px; color: white; cursor: pointer; font-weight: 600;">
+                                    <i class="fas fa-ticket-alt"></i> Submit Ticket
+                                </button>
+                            </div>
                         </div>
+                        
                         <div>
-                            <h4>Active Tickets:</h4>
-                            <ul id="ticketList" style="list-style: none; padding: 0;">
-                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">⚠️ Server response timeout</li>
-                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px;">🖥️ Software installation pending</li>
-                            </ul>
+                            <h4 style="margin-bottom: 15px; color: #c084fc;">
+                                <i class="fas fa-list-check"></i> Active Support Tickets
+                            </h4>
+                            <div style="max-height: 250px; overflow-y: auto;">
+                                <ul id="ticketList" style="list-style: none; padding: 0;">
+                                    <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                        <span><span style="color: #fbbf24;">⚠️</span> Server response timeout - Priority: High</span>
+                                        <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>
+                                    </li>
+                                    <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                        <span><span style="color: #fbbf24;">🖥️</span> Software installation - Windows 11 Update</span>
+                                        <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 12px; background: rgba(168, 85, 247, 0.1); border-radius: 12px; text-align: center;">
+                        <p style="font-size: 0.8rem; color: #c084fc;">
+                            <i class="fas fa-clock"></i> Average response time: &lt; 2 hours | 24/7 IT Support Available
+                        </p>
                     </div>
                 </div>
             `
         }
     };
     
+    // Store scroll position to prevent page jump
+    let savedScrollPosition = 0;
+    
+    // Global functions for demo interactions
     window.addDemoTask = function() {
         const input = document.getElementById('taskInput');
         const taskList = document.getElementById('taskList');
@@ -370,7 +405,7 @@ function initLiveDemos() {
         if (input && ticketList && input.value.trim()) {
             const li = document.createElement('li');
             li.style.cssText = 'background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
-            li.innerHTML = '<span>🔧 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 2px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>';
+            li.innerHTML = '<span><span style="color: #fbbf24;">🎫</span> ' + input.value.trim() + ' - Awaiting response</span><button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 12px;">Resolve</button>';
             ticketList.appendChild(li);
             input.value = '';
         }
@@ -392,19 +427,38 @@ function initLiveDemos() {
         }
     };
     
+    // Function to open modal without page jump
+    function openDemoModal() {
+        savedScrollPosition = window.scrollY;
+        demoModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollPosition}px`;
+        document.body.style.width = '100%';
+    }
+    
+    // Function to close modal and restore scroll position
     function closeDemoModal() {
         demoModal.style.display = 'none';
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, savedScrollPosition);
     }
     
+    // Handle demo button click
     function handleDemoClick(e) {
         e.preventDefault();
+        e.stopPropagation();
+        
         const demoType = this.getAttribute('data-demo');
         console.log("Demo clicked:", demoType);
+        
         if (demos[demoType]) {
             modalDynamicContent.innerHTML = demos[demoType].html;
-            demoModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            openDemoModal();
+            
             if (demoType === 'colorLab') {
                 setTimeout(window.setupColorLab, 100);
             }
@@ -413,26 +467,49 @@ function initLiveDemos() {
         }
     }
     
+    // Attach listeners to all demo buttons
     function attachDemoListeners() {
         const demoButtons = document.querySelectorAll('.live-demo-btn');
         console.log("Found demo buttons:", demoButtons.length);
         demoButtons.forEach(btn => {
+            // Remove existing listener to avoid duplicates
             btn.removeEventListener('click', handleDemoClick);
             btn.addEventListener('click', handleDemoClick);
+            // DO NOT modify the href attribute - let the click handler do its job
         });
     }
     
+    // Close button listener
     if (closeModalBtn) {
+        closeModalBtn.removeEventListener('click', closeDemoModal);
         closeModalBtn.addEventListener('click', closeDemoModal);
     }
     
+    // Close modal when clicking outside
     window.addEventListener('click', (e) => {
-        if (e.target === demoModal) closeDemoModal();
+        if (e.target === demoModal) {
+            closeDemoModal();
+        }
     });
     
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && demoModal.style.display === 'block') {
+            closeDemoModal();
+        }
+    });
+    
+    // Initial attachment
     attachDemoListeners();
+    
+    // Re-attach for dynamically loaded content
+    const observer = new MutationObserver(function() {
+        attachDemoListeners();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    console.log("Live demos initialized successfully");
 }
-
 // ======================== CONSULTATION FORM ========================
 function initContactForm() {
     const consultForm = document.getElementById('consultForm');

@@ -282,7 +282,7 @@ body.light-mode .footer {
 
 body.light-mode .footer-logo,
 body.light-mode .footer-content p {
-    color: #1e293b;
+    color: #dbdbdb;
 }
 
 body.light-mode .social-icons a {
@@ -581,6 +581,86 @@ body.light-mode .tech-badge {
     color: #9ca3af;
     margin-bottom: 16px;
     font-size: 0.95rem;
+}
+
+
+
+/* Modal Styles - Add to your style.css */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+#demoModal .modal-content {
+    background: #111118;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 28px;
+    border: 1px solid #a855f7;
+    overflow: hidden;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#demoModal .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #eef2ff;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+#demoModal .close-modal:hover {
+    color: #a855f7;
+}
+
+#modalDynamicContent {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar */
+#modalDynamicContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modalDynamicContent::-webkit-scrollbar-track {
+    background: #1a1a24;
+    border-radius: 10px;
+}
+
+#modalDynamicContent::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
 }
 
 .tech-badge {
