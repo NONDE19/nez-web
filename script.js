@@ -281,198 +281,197 @@ function initLightbox() {
     });
 }
 
-// ======================== LIVE DEMO MODAL SYSTEM ========================
-function initLiveDemos() {
-    const demoModal = document.getElementById('demoModal');
-    const modalDynamicContent = document.getElementById('modalDynamicContent');
+// ======================== LIVE DEMO MODAL SYSTEM ========================                        <div style="margin-bottom: 20px;">
+                      const demoModal = document.getElementById('demoModal');
+const modalDynamicContent = document.getElementById('modalDynamicContent');
+const closeModal = document.querySelector('.close-modal');
+
+// Task Manager Demo
+function showTaskManager() {
+    modalDynamicContent.innerHTML = `
+        <div style="padding: 20px;">
+            <h2 style="color: #1a1a2e; margin-bottom: 20px;">TaskFlow Manager</h2>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="taskInput" placeholder="Enter a new task..." style="width: 70%; padding: 10px; border: 2px solid #a855f7; border-radius: 8px;">
+                <button onclick="addTask()" style="background: #a855f7; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-left: 10px; cursor: pointer;">Add Task</button>
+            </div>
+            <ul id="taskList" style="list-style: none; padding: 0;"></ul>
+        </div>
+    `;
+    demoModal.style.display = 'flex';
     
-    if (!demoModal || !modalDynamicContent) {
-        console.log("Demo modal elements not found");
-        return;
-    }
-    
-    const demos = {
-        taskManager: {
-            title: '📋 TaskFlow Manager - Live Demo',
-            html: `
-                <div style="padding: 20px;">
-                    <h3 style="color: #c084fc; margin-bottom: 20px;">TaskFlow Manager</h3>
-                    <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
-                        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-                            <input type="text" id="taskInput" placeholder="Add a new task..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white; min-width: 200px;">
-                            <button onclick="window.addDemoTask()" style="background: #a855f7; border: none; padding: 12px 24px; border-radius: 40px; color: white; cursor: pointer;">➕ Add Task</button>
-                        </div>
-                        <ul id="taskList" style="list-style: none; padding: 0;">
-                            <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
-                                <span>📌 Complete project documentation</span>
-                                <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
-                            </li>
-                            <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;">
-                                <span>🎨 Design homepage wireframe</span>
-                                <button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>
-                            </li>
-                        </ul>
-                        <p style="margin-top: 16px; font-size: 0.85rem; color: #9ca3af;"><i class="fas fa-info-circle"></i> Interactive demo: Add/delete tasks</p>
-                    </div>
-                </div>
-            `
-        },
-        colorLab: {
-            title: '🎨 ColorLab Studio - Gradient Tool',
-            html: `
-                <div style="padding: 20px;">
-                    <h3 style="color: #c084fc; margin-bottom: 20px;">Live CSS Gradient Generator</h3>
-                    <div id="gradientPreview" style="height: 150px; border-radius: 24px; background: linear-gradient(135deg, #a855f7, #ec4899); margin-bottom: 20px;"></div>
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <div style="flex: 1;">
-                            <label style="color: #eef2ff; margin-bottom: 8px; display: block;">Color 1</label>
-                            <input type="color" id="color1" value="#a855f7" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
-                        </div>
-                        <div style="flex: 1;">
-                            <label style="color: #eef2ff; margin-bottom: 8px; display: block;">Color 2</label>
-                            <input type="color" id="color2" value="#ec4899" style="width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">
-                        </div>
-                    </div>
-                    <p id="gradientCode" style="margin-top: 16px; background: #0a0a0f; padding: 12px; border-radius: 12px; font-family: monospace; font-size: 0.85rem;">background: linear-gradient(135deg, #a855f7, #ec4899);</p>
-                </div>
-            `
-        },
-        supportHub: {
-            title: '🎫 SupportHub Lite - IT Consultation Demo',
-            html: `
-                <div style="padding: 20px;">
-                    <div style="text-align: center; margin-bottom: 25px;">
-                        <div style="background: linear-gradient(135deg, #a855f7, #7c3aed); width: 60px; height: 60px; border-radius: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                            <i class="fas fa-headset" style="font-size: 30px; color: white;"></i>
-                        </div>
-                        <h3 style="color: #c084fc; margin-bottom: 10px;">IT Support Ticket System</h3>
-                        <p style="color: #9ca3af; font-size: 14px;">Professional IT consultation, troubleshooting, and support ticketing demo</p>
-                    </div>
-                    <div style="background: #1a1a24; border-radius: 16px; padding: 20px;">
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; color: #eef2ff; font-weight: 500;">Create New Support Ticket</label>
-                            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                                <input type="text" id="ticketIssue" placeholder="Describe your technical issue..." style="flex: 1; padding: 12px; border-radius: 40px; border: 1px solid #a855f7; background: #0a0a0f; color: white;">
-                                <button onclick="window.createSupportTicket()" style="background: #a855f7; border: none; padding: 12px 28px; border-radius: 40px; color: white; cursor: pointer;">Submit Ticket</button>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 15px; color: #c084fc;">Active Support Tickets</h4>
-                            <ul id="ticketList" style="list-style: none; padding: 0;">
-                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span>⚠️ Server response timeout - Priority: High</span>
-                                    <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>
-                                </li>
-                                <li style="background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span>🖥️ Software installation - Windows 11 Update</span>
-                                    <button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            `
-        }
-    };
-    
-    let savedScrollPosition = 0;
-    
-    window.addDemoTask = function() {
+    // Load existing tasks
+    window.tasks = window.tasks || [];
+    window.addTask = function() {
         const input = document.getElementById('taskInput');
+        const taskText = input.value.trim();
+        if (taskText) {
+            window.tasks.push({ text: taskText, completed: false });
+            input.value = '';
+            renderTaskList();
+        }
+    };
+    
+    window.toggleTask = function(index) {
+        window.tasks[index].completed = !window.tasks[index].completed;
+        renderTaskList();
+    };
+    
+    window.deleteTask = function(index) {
+        window.tasks.splice(index, 1);
+        renderTaskList();
+    };
+    
+    function renderTaskList() {
         const taskList = document.getElementById('taskList');
-        if (input && taskList && input.value.trim()) {
+        if (!taskList) return;
+        taskList.innerHTML = '';
+        window.tasks.forEach((task, index) => {
             const li = document.createElement('li');
-            li.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #2d2d3a;';
-            li.innerHTML = '<span>📌 ' + input.value.trim() + '</span><button onclick="this.parentElement.remove()" style="background: #ef4444; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Delete</button>';
+            li.style.cssText = `
+                background: #f8f9fa;
+                margin: 10px 0;
+                padding: 12px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            `;
+            li.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span style="${task.completed ? 'text-decoration: line-through; color: #999;' : 'color: #333;'}">${task.text}</span>
+                </div>
+                <button onclick="deleteTask(${index})" style="background: #dc2626; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer;">Delete</button>
+            `;
             taskList.appendChild(li);
-            input.value = '';
-        }
-    };
-    
-    window.createSupportTicket = function() {
-        const input = document.getElementById('ticketIssue');
-        const ticketList = document.getElementById('ticketList');
-        if (input && ticketList && input.value.trim()) {
-            const li = document.createElement('li');
-            li.style.cssText = 'background: #0f0f17; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
-            li.innerHTML = '<span>🎫 ' + input.value.trim() + ' - Awaiting response</span><button onclick="this.parentElement.remove()" style="background: #10b981; border: none; padding: 4px 12px; border-radius: 20px; color: white; cursor: pointer;">Resolve</button>';
-            ticketList.appendChild(li);
-            input.value = '';
-        }
-    };
-    
-    window.setupColorLab = function() {
-        const color1 = document.getElementById('color1');
-        const color2 = document.getElementById('color2');
-        const preview = document.getElementById('gradientPreview');
-        const code = document.getElementById('gradientCode');
-        if (color1 && color2 && preview && code) {
-            const updateGradient = () => {
-                const grad = `linear-gradient(135deg, ${color1.value}, ${color2.value})`;
-                preview.style.background = grad;
-                code.textContent = `background: ${grad};`;
-            };
-            color1.addEventListener('input', updateGradient);
-            color2.addEventListener('input', updateGradient);
-        }
-    };
-    
-    function openDemoModal() {
-        savedScrollPosition = window.scrollY;
-        demoModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeDemoModal() {
-        demoModal.style.display = 'none';
-        document.body.style.overflow = '';
-        window.scrollTo(0, savedScrollPosition);
-    }
-    
-    function handleDemoClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const demoType = this.getAttribute('data-demo');
-        console.log("Demo clicked:", demoType);
-        
-        if (demos[demoType]) {
-            modalDynamicContent.innerHTML = demos[demoType].html;
-            openDemoModal();
-            if (demoType === 'colorLab') {
-                setTimeout(window.setupColorLab, 100);
-            }
-        } else {
-            alert('Demo not available');
-        }
-    }
-    
-    function attachDemoListeners() {
-        const demoButtons = document.querySelectorAll('.live-demo-btn');
-        console.log("Found demo buttons:", demoButtons.length);
-        demoButtons.forEach(btn => {
-            btn.removeEventListener('click', handleDemoClick);
-            btn.addEventListener('click', handleDemoClick);
         });
     }
+    renderTaskList();
+}
+
+// ColorLab Demo
+function showColorLab() {
+    modalDynamicContent.innerHTML = `
+        <div style="padding: 20px; text-align: center;">
+            <h2 style="color: #1a1a2e; margin-bottom: 20px;">ColorLab Studio</h2>
+            <div style="margin-bottom: 20px;">
+                <input type="color" id="color1" value="#a855f7" style="width: 80px; height: 80px; margin: 10px; cursor: pointer;">
+                <input type="color" id="color2" value="#ec4899" style="width: 80px; height: 80px; margin: 10px; cursor: pointer;">
+            </div>
+            <div id="gradientPreview" style="width: 100%; height: 200px; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 12px; margin-bottom: 20px;"></div>
+            <div style="margin-bottom: 20px;">
+                <p style="font-size: 14px; color: #666;">CSS Gradient Code:</p>
+                <code id="gradientCode" style="background: #f0f0f0; padding: 10px; border-radius: 8px; display: inline-block;">linear-gradient(135deg, #a855f7, #ec4899)</code>
+            </div>
+            <button onclick="copyGradient()" style="background: #a855f7; color: white; border: none; padding: 10px 30px; border-radius: 25px; cursor: pointer;">Copy CSS</button>
+        </div>
+    `;
+    demoModal.style.display = 'flex';
     
-    const closeModalBtn = demoModal.querySelector('.close-modal');
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeDemoModal);
+    const color1 = document.getElementById('color1');
+    const color2 = document.getElementById('color2');
+    const gradientPreview = document.getElementById('gradientPreview');
+    const gradientCode = document.getElementById('gradientCode');
+    
+    function updateGradient() {
+        const c1 = color1.value;
+        const c2 = color2.value;
+        const gradient = `linear-gradient(135deg, ${c1}, ${c2})`;
+        gradientPreview.style.background = gradient;
+        gradientCode.textContent = gradient;
     }
     
-    window.addEventListener('click', (e) => {
-        if (e.target === demoModal) closeDemoModal();
-    });
+    color1.addEventListener('input', updateGradient);
+    color2.addEventListener('input', updateGradient);
     
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && demoModal.style.display === 'block') {
+    window.copyGradient = function() {
+        navigator.clipboard.writeText(gradientCode.textContent);
+        alert('✓ Gradient code copied!');
+    };
+}
+
+// SupportHub Demo
+function showSupportHub() {
+    modalDynamicContent.innerHTML = `
+        <div style="padding: 20px;">
+            <h2 style="color: #1a1a2e; margin-bottom: 20px;">SupportHub Lite</h2>
+            <div style="margin-bottom: 20px;">
+                <h3>Frequently Asked Questions</h3>
+                <div style="margin-top: 15px;">
+                    <div class="faq-item" style="margin-bottom: 10px;">
+                        <button onclick="toggleFaq(0)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔧 How do I schedule a consultation?</button>
+                        <div id="faq0" class="faq-answer" style="display: none; padding: 12px; background: #000; border-radius: 8px; margin-top: 5px;">Simply fill out the consultation form on our contact page or email us directly at nondeezekiel4@gmail.com</div>
+                    </div>
+                    <div class="faq-item" style="margin-bottom: 10px;">
+                        <button onclick="toggleFaq(1)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">💻 What software installation services do you offer?</button>
+                        <div id="faq1" class="faq-answer" style="display: none; padding: 12px; background: #000; border-radius: 8px; margin-top: 5px;">We install IDEs, databases, servers, development tools, and business software on Windows/Linux/Mac.</div>
+                    </div>
+                    <div class="faq-item" style="margin-bottom: 10px;">
+                        <button onclick="toggleFaq(2)" style="width: 100%; text-align: left; padding: 12px; background: #f8f9fa; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🌐 Do you offer ongoing IT support?</button>
+                        <div id="faq2" class="faq-answer" style="display: none; padding: 12px; background: #000; border-radius: 8px; margin-top: 5px;">Yes! We provide monthly maintenance plans and on-call troubleshooting for businesses.</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 12px; text-align: center;">
+                <h4 style="color: white; margin-bottom: 10px;">Need immediate help?</h4>
+                <button onclick="closeDemoModal(); document.getElementById('contact').scrollIntoView({behavior: 'smooth'});" style="background: white; color: #a855f7; border: none; padding: 10px 25px; border-radius: 25px; cursor: pointer;">Contact Support →</button>
+            </div>
+        </div>
+    `;
+    demoModal.style.display = 'flex';
+    
+    window.toggleFaq = function(index) {
+        const answer = document.getElementById(`faq${index}`);
+        if (answer.style.display === 'none') {
+            answer.style.display = 'block';
+        } else {
+            answer.style.display = 'none';
+        }
+    };
+}
+
+// Close modal function
+window.closeDemoModal = function() {
+    if (demoModal) {
+        demoModal.style.display = 'none';
+    }
+};
+
+// Add event listeners to live demo buttons
+document.querySelectorAll('.live-demo-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const demoType = btn.getAttribute('data-demo');
+        
+        switch(demoType) {
+            case 'taskManager':
+                showTaskManager();
+                break;
+            case 'colorLab':
+                showColorLab();
+                break;
+            case 'supportHub':
+                showSupportHub();
+                break;
+            default:
+                console.log('Unknown demo type');
+        }
+    });
+});
+
+// Close modal when clicking X or outside
+if (closeModal) {
+    closeModal.addEventListener('click', closeDemoModal);
+}
+if (demoModal) {
+    demoModal.addEventListener('click', (e) => {
+        if (e.target === demoModal) {
             closeDemoModal();
         }
     });
-    
-    attachDemoListeners();
-    console.log("Live demos initialized successfully");
 }
+      
 
 // ======================== CONSULTATION FORM ========================
 function initContactForm() {
